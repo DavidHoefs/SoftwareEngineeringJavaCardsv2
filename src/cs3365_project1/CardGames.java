@@ -5,7 +5,7 @@
 */
 
 
-package CardGames;
+package cs3365_project1;
 
 import java.util.Scanner;
 

@@ -14,7 +14,7 @@
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <VBox alignment="TOP_CENTER" layoutX="153.0" layoutY="72.0" prefHeight="190.0" prefWidth="223.0" style="-fx-background-color: #FF0000;">
          <children>
-            <Button id="playBlackjackButton" fx:id="playBlackjackButton" mnemonicParsing="false" text="Play Blackjack" textAlignment="CENTER">
+            <Button id="playBlackjackButton" fx:id="playBlackjackButton" mnemonicParsing="false" onAction="#playBlackjack" text="Play Blackjack" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Button>

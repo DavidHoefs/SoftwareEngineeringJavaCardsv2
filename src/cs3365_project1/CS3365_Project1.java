@@ -5,33 +5,37 @@
  */
 package cs3365_project1;
 
+
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-/**
- *
- * @author hoefs
- */
+import javafx.scene.Scene;
+
+import javafx.stage.Stage;
+import static javafx.application.Application.launch;
+import javafx.scene.Parent;
+
 public class CS3365_Project1 extends Application {
+   
+
+    
     
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+    public void start(Stage stage) throws Exception{
+    
+         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
-    }
+       
+      }
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         launch(args);
+
     }
-    
 }

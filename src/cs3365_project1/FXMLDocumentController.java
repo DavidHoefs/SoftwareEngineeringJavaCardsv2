@@ -7,11 +7,17 @@ package cs3365_project1;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -31,7 +37,18 @@ public class FXMLDocumentController implements Initializable {
     private Label mainTitleLabel;
     @FXML
     private Button exitGameButton;
+    @FXML
+    private void playBlackjack(ActionEvent event) throws Exception{
+        event.consume();
+        try {
 
+            Stage s = new Stage();
+        new BlackjackGame().start(s);
+       
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+    }
     /**
      * Initializes the controller class.
      */
@@ -39,5 +56,6 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
     
 }
