@@ -144,10 +144,10 @@ public class BlackjackGame extends Application {
         grid.setPadding(new Insets(2, 2, 2, 2));
         grid.setHgap(6);
         grid.setVgap(6); 
-        grid.setGridLinesVisible(true);
+//        grid.setGridLinesVisible(true);
         grid.add(playerCountText, 6, 0);
         grid.add(startButton,7,0);
-        grid.add(dealerCards, 3, 1, 1, 2); 
+        grid.add(dealerCards, 3, 1, 2, 2); 
         dealerCards.setPrefWrapLength(2.0);
        
         grid.add(dealerLbl, 3, 0); //changed
@@ -304,7 +304,8 @@ public class BlackjackGame extends Application {
         });
         
         standbtn.setOnAction((e) -> {
-             System.out.println("Stand, player " + player);
+             playerLabels[player].setText("Player " + (player + 1) 
+                     +" Stand");
             player++;
             if(player <playerCount){
                 playerLabels[player].setText("\nPlayer " + (player + 1) + "'s turn:\n");
@@ -354,18 +355,19 @@ public class BlackjackGame extends Application {
         }while(hit == 1);
         
         // Calculate winner
+        String winnerString = "";
         boolean dealerWins = true;
         char []winners = new char[playerCount];//winners array may be useful later; if not, just delete it
         System.out.print("\nWinner(s): \n");
         for(int player = 0; player < playerCount; player++){
             //player beat the dealer
             if(!playerHand[player].getBust() && ((playerHand[player].getTotalPoints() > dealerHand.getTotalPoints()) || dealerHand.getBust())){
-                status.setText("Player " + (player + 1) + "Wins!\n");
+//                winnerString += ("Player " + (player + 1) + " Wins!\n");
                 winners[player] = 'W';
                 dealerWins = false;
             //player tied with the dealer
             }else if(!playerHand[player].getBust() && ((playerHand[player].getTotalPoints() == dealerHand.getTotalPoints()) || dealerHand.getBust())){
-                status.setText("Player " + (player + 1) + "! (Tie)\n");
+//                winnerString += ("Player " + (player + 1) + "! (Tie)\n");
                 winners[player] = 'T';
                 dealerWins = false;
             //player loses
@@ -374,8 +376,21 @@ public class BlackjackGame extends Application {
         }
         if(dealerWins && dealerHand.getBust() == false)
             status.setText("Dealer Wins!\n");
-        
-        
+        else{
+        int highScore = playerHand[0].getTotalPoints();
+        winnerString = "Player 1 Wins!";
+        for(int i = 1;i<winners.length;i++){
+            if(winners[i] == 'W'){
+                
+                if(playerHand[i].getTotalPoints() > highScore && playerHand[i].getTotalPoints() < 22){
+                    highScore = playerHand[i].getTotalPoints();
+                    winnerString = "\nPlayer " + (i+1) + " Wins!";
+                }
+                
+            }
+        }
+        status.setText(winnerString);
+        }
             }
         });
 

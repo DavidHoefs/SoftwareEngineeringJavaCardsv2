@@ -1,8 +1,3 @@
-/*
-*   CS 2365 OOP Spring 2020
-*   Shreyesh Arangath 
-*   shreyesh.arangath@ttu.edu
-*/
 
 
 package cs3365_project1;
@@ -11,7 +6,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author shreyesh
+
  */
 public class CardGames {
     

@@ -1,8 +1,3 @@
-/*
-    CS 2365, section 1, Spring 2020
-    Shreyesh Arangath
-    Project 2
- */
 
 /*
  * To change this license header, choose License Headers in Project Properties.
