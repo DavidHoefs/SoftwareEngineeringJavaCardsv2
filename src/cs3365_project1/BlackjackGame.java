@@ -59,7 +59,8 @@ public class BlackjackGame extends Application {
     Label player6Lbl = new Label("Player 6 Hand");
     Label player7Lbl = new Label("Player 7 Hand");
     Label status = new Label("Game");
-    Image imageback = new Image("file:C:\\Users\\hoefs\\Documents\\CS3365_Project_\\CS3365_Project1\\src\\cs3365_project1\\cards\\table.png");
+    Image imageback = new Image(getClass().getResourceAsStream("table.png"));
+    
     TextField playerCountText = new TextField();
     int playerCount = 0;
     int player = 0;
@@ -140,13 +141,13 @@ public class BlackjackGame extends Application {
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setPadding(new Insets(4, 4, 4, 4));
+        grid.setPadding(new Insets(2, 2, 2, 2));
         grid.setHgap(6);
         grid.setVgap(6); 
         grid.setGridLinesVisible(true);
         grid.add(playerCountText, 6, 0);
         grid.add(startButton,7,0);
-        grid.add(dealerCards, 3, 1, 2, 2); 
+        grid.add(dealerCards, 3, 1, 1, 2); 
         dealerCards.setPrefWrapLength(2.0);
        
         grid.add(dealerLbl, 3, 0); //changed
@@ -296,6 +297,8 @@ public class BlackjackGame extends Application {
                     player++;
                     playerLabels[player].setText("\nPlayer " + (player + 1) + "'s turn:\n");
                     
+                   
+                    
                 }
             
         });
@@ -305,6 +308,7 @@ public class BlackjackGame extends Application {
             player++;
             if(player <playerCount){
                 playerLabels[player].setText("\nPlayer " + (player + 1) + "'s turn:\n");
+                
             }
             
            
@@ -319,7 +323,7 @@ public class BlackjackGame extends Application {
             points = dealerHand.getTotalPoints();
             totalLabelDealer.setText("Points: " + Integer.toString(points));
             
-            dealerHand.getHand().forEach((card) -> {
+           dealerHand.getHand().forEach((card) -> {
                 
                 
                 System.out.print(card.getValue() + " " + card.getSuit() + "\n");

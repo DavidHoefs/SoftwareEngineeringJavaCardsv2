@@ -4,6 +4,11 @@
 *
  */
 package cs3365_project1;
+
+import java.io.InputStream;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author Cole Trammell
@@ -94,7 +99,7 @@ public class Card {
   else if("ACE".equals(this.value))
         this.points = 1;
     }
-    
+//    C:\\Users\\hoefs\\Documents\\CS3365_Project_
     public String getFilename( String suit, String value ) {
       return "file:C:\\Users\\hoefs\\Documents\\CS3365_Project_\\CS3365_Project1\\src\\cs3365_project1\\cards\\"+value.charAt(0) + suit.charAt(0) + ".gif";
    }
