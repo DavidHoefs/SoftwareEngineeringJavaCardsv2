@@ -3,14 +3,14 @@
 * CS 3365 001
 *
 */
-package cs3365_project1;
+package CardGames;
 
-import cs3365_project1.Card;
+import CardGames.Card;
 import java.util.LinkedList;
 import java.util.Collections;
 
 /***
- * @Cole Trammell
+ * @Cole 
  * 
  * Handle the main Deck
  */

@@ -5,10 +5,10 @@
  * and open the template in the editor.
  */
 
-package cs3365_project1;
+package CardGames;
 
-import cs3365_project1.Deck;
-import cs3365_project1.Card;
+import CardGames.Deck;
+import CardGames.Card;
 import java.util.LinkedList;
 
 /**

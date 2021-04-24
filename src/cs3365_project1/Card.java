@@ -3,12 +3,12 @@
 *Cole Trammell
 *
  */
-package cs3365_project1;
-
+package CardGames;
+/*
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+*/
 /**
  *
  * @author Cole Trammell
