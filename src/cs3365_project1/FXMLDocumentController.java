@@ -49,6 +49,18 @@ public class FXMLDocumentController implements Initializable {
         e.printStackTrace();
     }
     }
+    
+    @FXML
+    private void viewLeaderboard(ActionEvent event) throws Exception{
+        event.consume();
+        try{
+            Stage s = new Stage();
+            new ViewLeaderboard().start(s);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Initializes the controller class.
      */

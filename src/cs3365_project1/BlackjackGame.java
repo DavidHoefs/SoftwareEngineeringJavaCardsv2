@@ -478,15 +478,17 @@ public class BlackjackGame extends Application {
         
         playAgainDialog.showAndWait();
         playAgainString = playAgainDialog.getEditor().getText();
-        if(playAgainString == "N"){
+        if( "N".equals(playAgainString)){
+            primaryStage.close();
            try{
-                updateScoreboard("C:\\Users\\hoefs\\Documents\\CS3365_Project_\\CS3365_Project1\\BlackJackScoreBoard.txt", playerChips, playerCount);
+                updateScoreboard("C:\\\\Users\\\\hoefs\\\\Documents\\BlackjackScoreBoard.txt", playerChips, playerCount);
 
            }
            catch(IOException ex){
             ex.printStackTrace();
                
            }
+           
         
         }
             }
