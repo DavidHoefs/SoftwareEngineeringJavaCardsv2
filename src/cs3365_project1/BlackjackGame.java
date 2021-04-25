@@ -5,6 +5,14 @@
  */
 package cs3365_project1;
 
+import static cs3365_project1.CardGames.updateScoreboard;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -13,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -25,6 +34,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -62,11 +72,24 @@ public class BlackjackGame extends Application {
     Image imageback = new Image(getClass().getResourceAsStream("table.png"));
     
     TextField playerCountText = new TextField();
+    
+    TextField player1bet = new TextField();
+    TextField player2bet = new TextField();
+    
+    Label player1betlbl = new Label();
+    Label player2betlbl = new Label();
+    Label player3betlbl = new Label();
+    Label player4betlbl = new Label();
+    Label player5betlbl = new Label();
+    Label player6betlbl = new Label();
+    Label player7betlbl = new Label();
+
     int playerCount = 0;
     int player = 0;
     Hand[] playerHand;
     Deck deck;
     Hand dealerHand;
+    PlayerChips[] playerChips;
     int points = 0;
     int startingCardsDisplayed = 0;
     int dealerCardsDisplayed = 0;
@@ -78,6 +101,10 @@ public class BlackjackGame extends Application {
     Label [] playerLabels = {playerLbl,player2Lbl,player3Lbl,player4Lbl,player5Lbl,player6Lbl,player7Lbl};
 
     Label [] playerPointsLabels = {player1points,player2points,player3points,player4points,player5points,player6points,player7points};
+    TextField [] playerBets = {player1bet,player2bet};
+    Label [] playerBetLbls = {player1betlbl,player2betlbl,player3betlbl,player4betlbl,player5betlbl,player6betlbl,player7betlbl};
+    
+    String playAgainString;
     //         Update all text colors and fonts
     @Override
     public  void start(Stage primaryStage){
@@ -123,6 +150,23 @@ public class BlackjackGame extends Application {
         player6points.setFont(new Font("Arial", 24));
         player7points.setTextFill(Color.web("#FFF")); 
         player7points.setFont(new Font("Arial", 24));
+        
+        
+        player1betlbl.setTextFill(Color.web("#FFF"));
+        player1betlbl.setFont(new Font("Arial", 14));
+        
+        player2betlbl.setTextFill(Color.web("#FFF"));
+        player2betlbl.setFont(new Font("Arial", 14));
+        player3betlbl.setTextFill(Color.web("#FFF"));
+        player3betlbl.setFont(new Font("Arial", 14));
+        player4betlbl.setTextFill(Color.web("#FFF"));
+        player4betlbl.setFont(new Font("Arial", 14));
+        player5betlbl.setTextFill(Color.web("#FFF"));
+        player5betlbl.setFont(new Font("Arial", 14));
+        player6betlbl.setTextFill(Color.web("#FFF"));
+        player6betlbl.setFont(new Font("Arial", 14));
+        player7betlbl.setTextFill(Color.web("#FFF"));
+        player7betlbl.setFont(new Font("Arial", 14));
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
@@ -164,29 +208,36 @@ public class BlackjackGame extends Application {
         grid.add(playerLbl, 0, 5); // good
         grid.add(player1points, 0, 6);
         grid.add(player2cards,1,3,1,2);
+//        grid.add(player1bet,0,8,1,2);
+        grid.add(player1betlbl, 0, 9,1,2);
          player2cards.setPrefWrapLength(2.0);
         grid.add(player2Lbl, 1, 5);
         grid.add(player2points, 1, 6);
+//        grid.add(player2bet,1,8);
+        grid.add(player2betlbl, 1, 9,1,2);
         grid.add(player3cards,2,3,1,2);
          player3cards.setPrefWrapLength(2.0);
         grid.add(player3Lbl,2,5);
         grid.add(player3points, 2, 6);
+        grid.add(player3betlbl, 2, 9,1,2);
         grid.add(player4cards, 3, 3,1,2);
          player4cards.setPrefWrapLength(2.0);
         grid.add(player4points, 3, 6);
         grid.add(player4Lbl, 3, 5);
+        grid.add(player4betlbl, 3, 9,1,2);
         grid.add(player5cards,4,3,1,2);
         player5cards.setPrefWrapLength(2.0);
         grid.add(player5Lbl, 4, 5);
         grid.add(player5points, 4, 6);
-        
+        grid.add(player5betlbl, 4, 9,1,2);
         grid.add(player6cards,5,3,1,2);
         player6cards.setPrefWrapLength(2.0);
         grid.add(player6Lbl, 5, 5);
         grid.add(player6points, 5, 6);
-        
+        grid.add(player6betlbl, 5, 9,1,2);
         grid.add(player7cards,6,3,1,2);
         player7cards.setPrefWrapLength(2.0);
+        grid.add(player7betlbl, 6, 9,1,2);
         grid.add(player7Lbl, 6, 5);
         grid.add(player7points, 6, 6);
         
@@ -196,6 +247,15 @@ public class BlackjackGame extends Application {
         
         grid.add(status, 0, 0 );
         grid.setBackground(background);
+        
+        
+        TextInputDialog inputdialog = new TextInputDialog("Enter Bet");
+        inputdialog.setContentText("Bet");
+        inputdialog.setHeaderText("Wager Dialog");
+        
+        TextInputDialog playAgainDialog = new TextInputDialog("Play Again?");
+        playAgainDialog.setContentText("Player again Y/N");
+        playAgainDialog.setHeaderText("Play Again Dialog");
         
         
         Scene scene = new Scene(grid, 1600, 900);
@@ -211,6 +271,27 @@ public class BlackjackGame extends Application {
             playerHand = new Hand[playerCount];
             for(int player = 0; player < playerCount; player++)
                 playerHand[player] = new Hand(deck);
+            
+            playerChips = new PlayerChips[playerCount];
+            for(int player = 0; player < playerCount; player++)
+                playerChips[player] = new PlayerChips();
+        
+            boolean playAgain = true;
+            boolean betting = true;
+            // get initial bet
+            for(int player = 0; player < playerCount; player++){
+                
+                playerBetLbls[player].setText("Player " + (player + 1) + " chips: " + playerChips[player].getTotalValue());
+                
+                inputdialog.showAndWait();
+                
+                
+                Chip chip = new Chip((Integer.parseInt(inputdialog.getEditor().getText())));
+                playerChips[player].addBet(chip);//add chip to player's bet
+                
+               playerBetLbls[player].setText("Current bet: " + playerChips[player].getBetValue());
+            }
+            
             
             // display cards
             for(int i = 0;i<playerCount;i++){
@@ -239,7 +320,7 @@ public class BlackjackGame extends Application {
          
         //start game
         //player turns
-           
+       
         });
         
         
@@ -385,13 +466,65 @@ public class BlackjackGame extends Application {
                 if(playerHand[i].getTotalPoints() > highScore && playerHand[i].getTotalPoints() < 22){
                     highScore = playerHand[i].getTotalPoints();
                     winnerString = "\nPlayer " + (i+1) + " Wins!";
+                    
                 }
                 
             }
         }
         status.setText(winnerString);
+        
+        
+        }
+        
+        playAgainDialog.showAndWait();
+        playAgainString = playAgainDialog.getEditor().getText();
+        if(playAgainString == "N"){
+           try{
+                updateScoreboard("C:\\Users\\hoefs\\Documents\\CS3365_Project_\\CS3365_Project1\\BlackJackScoreBoard.txt", playerChips, playerCount);
+
+           }
+           catch(IOException ex){
+            ex.printStackTrace();
+               
+           }
+        
         }
             }
+            
+        
         });
 
-}}
+}
+
+public static void updateScoreboard(String fname, PlayerChips []PC, int count) throws IOException{
+        //writes chip count to file per player
+        //i.e. line 1 = player 1, line 2 = player 2... etc.
+        LinkedList<Integer> tempScores = new LinkedList<>();
+        File file = new File(fname);
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        
+        //read values already in file
+        String st;
+        while((st = br.readLine())!= null)
+            tempScores.add(Integer.parseInt(st));
+        br.close();
+        
+        //if new values are higher, replace them
+        for(int player = 0; player < count; player++){
+            if(tempScores.get(player) < PC[player].getTotalValue())
+                tempScores.set(player, PC[player].getTotalValue());
+            //System.out.println(tempScores.get(player));
+        }
+        
+        //write to file
+        FileWriter writer = new FileWriter(fname);
+        writer.write(tempScores.get(0).toString() + '\n' + 
+                     tempScores.get(1).toString() + '\n' + 
+                     tempScores.get(2).toString() + '\n' + 
+                     tempScores.get(3).toString() + '\n' + 
+                     tempScores.get(4).toString() + '\n' + 
+                     tempScores.get(5).toString() + '\n' + 
+                     tempScores.get(6).toString() + '\n');
+        writer.close();
+    }
+}

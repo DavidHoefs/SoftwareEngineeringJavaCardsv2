@@ -1,4 +1,4 @@
-package CardGames;
+package cs3365_project1;
 
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -158,7 +158,7 @@ public class CardGames {
         }
         
         try{
-            updateScoreboard("D:\\Documents - HDD\\NetBeansProjects\\bj\\src\\CardGames\\BlackJackScoreBoard.txt", playerChips, playerCount);
+            updateScoreboard("C:\\Users\\hoefs\\Documents\\CS3365_Project_\\CS3365_Project1\\BlackJackSccoreBoard.txt", playerChips, playerCount);
         }catch(IOException e){
             e.printStackTrace();
         }

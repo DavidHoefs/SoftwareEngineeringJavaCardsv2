@@ -3,9 +3,9 @@
 * CS 3365 001
 *
 */
-package CardGames;
+package cs3365_project1;
 
-import CardGames.Card;
+import cs3365_project1.Card;
 import java.util.LinkedList;
 import java.util.Collections;
 

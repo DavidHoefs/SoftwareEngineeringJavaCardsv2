@@ -3,7 +3,7 @@
 *Cole Trammell
 *
  */
-package CardGames;
+package cs3365_project1;
 /*
 import java.io.InputStream;
 import javafx.scene.image.Image;

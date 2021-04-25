@@ -3,7 +3,7 @@
 *Cole Trammell
 *
  */
-package CardGames;
+package cs3365_project1;
 
 
 
