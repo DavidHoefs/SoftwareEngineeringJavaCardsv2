@@ -490,6 +490,10 @@ public class BlackjackGame extends Application {
            }
            
         
+        }else{
+            // restart
+            Stage st = new Stage();
+            start(st);
         }
             }
             
